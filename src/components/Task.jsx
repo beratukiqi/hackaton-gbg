@@ -1,7 +1,10 @@
 function Task({ data }) {
+    // {
+    //     text: "hehehe";
+    // }
     return (
         <article className="Task__Item">
-            {data && <h2>Task: {data}</h2>}
+            <h2>Task: {data.text}</h2>
         </article>
     );
 }

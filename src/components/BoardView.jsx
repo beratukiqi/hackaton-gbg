@@ -13,7 +13,7 @@ function BoardView() {
             {popupVisible && <GPTModule setPopupVisible={setPopupVisible} />}
             <h2>Board View Component</h2>
             <div className="Column__Wrapper">
-                <Column />
+                <Column backlog={true} />
                 <Column />
                 <Column />
             </div>

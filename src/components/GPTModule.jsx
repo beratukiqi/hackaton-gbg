@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Task from "./Task";
-
+import MyContext from "../main";
 function GPTModule({ setPopupVisible }) {
     const [inputValue, setInputValue] = useState();
     const [generatedData, setGeneratedData] = useState([]);
     const [loaded, setLoaded] = useState(false);
+    const { aiData, updateAiData } = useContext(MyContext);
     const generateResponse = () => {
-        // Anropet ger DATA
+        // Anropet GPT API
+        // FÅ ETT SVAR
+        // SPARA NER SVARET I VARIABEL
+
         const data = [
             {
                 text: "Hej hej",
@@ -18,12 +22,21 @@ function GPTModule({ setPopupVisible }) {
                 text: "Hej HEJ 333",
             },
         ];
-        setGeneratedData(data);
+
+        // SPARA NER SVARET I ETT STATE
+        setGeneratedData(data); // UPPDATERADE LISTAN
     };
 
     useEffect(() => {
         setLoaded(true);
+        console.log(generatedData, "GEN DATA");
+        console.log(loaded, "LOADED CHANGE");
+        updateAiData(generatedData);
     }, [generatedData]);
+
+    useEffect(() => {
+        console.log("AI DATA", aiData);
+    }, [aiData]);
 
     return (
         <div className="Module__Backdrop">
@@ -33,13 +46,13 @@ function GPTModule({ setPopupVisible }) {
                     onChange={(e) => setInputValue(e.target.value)}
                     type="text"
                 />
-                <p>{inputValue}</p>
+                <p>Värdet skickas som: {inputValue}</p>
+
                 <div className="task__list">
                     {loaded &&
-                        generatedData.forEach((task, i) => {
-                            <Task key={i} data={task} />;
-                            console.log("ADDED");
-                        })}
+                        generatedData.map((task, i) => (
+                            <Task key={i} data={task} />
+                        ))}
                 </div>
                 <button
                     style={{ background: "red" }}
