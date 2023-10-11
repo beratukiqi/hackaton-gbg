@@ -1,36 +1,34 @@
 import { useContext, useEffect, useState } from "react";
 import Task from "./Task";
 import MyContext from "../main";
-// import { Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi } from "openai";
 
 function GPTModule({ setPopupVisible }) {
-    // const configuration = new Configuration({
-    //     organization: "org-h95CoawxojtJxquEgL3PVNty",
-    //     apiKey: "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",
-    // });
-    // const openai = new OpenAIApi(configuration);
-
-    // async function GetApiResponse() {
-    //     const completion = await openai.createChatCompletion({
-    //         model: "gpt-3.5-turbo",
-    //         messages: [{ role: "user", content: "Hello there" }],
-    //     });
-
-    //     console.log(" API CALLED ", completion.data.choices[0].message);
-    // }
-
     const [inputValue, setInputValue] = useState();
     const [generatedData, setGeneratedData] = useState([]);
     const [loaded, setLoaded] = useState(false);
     const { aiData, updateAiData } = useContext(MyContext);
 
-    // useEffect(() => {
-    //     GetApiResponse();
-    // }, []);
-    const generateResponse = () => {
-        // Anropet GPT API
-        // FÅ ETT SVAR
-        // SPARA NER SVARET I VARIABEL
+    const generateResponse = async () => {
+        const res = await fetch("http://localhost:8000/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization:
+                    "Bearer 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",
+            },
+            body: JSON.stringify({ userInput: inputValue }),
+        });
+        console.log("RESPONSE IS COMPLETETED : ", res);
+
+        if (res.ok) {
+            const jsonData = await res.json(); // Parse response body as JSON
+            console.log("Response JSON Data: ", jsonData);
+
+            // Now you can work with jsonData as an object
+        } else {
+            console.error("Request failed with status: " + res.status);
+        }
 
         const data = [
             {
@@ -64,6 +62,9 @@ function GPTModule({ setPopupVisible }) {
                 text: "10. Write documentation and user guide.",
             },
         ];
+        // Anropet GPT API
+        // FÅ ETT SVAR
+        // SPARA NER SVARET I VARIABEL
 
         // SPARA NER SVARET I ETT STATE
         setGeneratedData(data); // UPPDATERADE LISTAN
@@ -105,7 +106,14 @@ function GPTModule({ setPopupVisible }) {
                 >
                     Generate
                 </button>
-                <button onClick={() => setPopupVisible(false)}>Confirm</button>
+                <button
+                    onClick={() => {
+                        setPopupVisible(false);
+                        GetApiResponse();
+                    }}
+                >
+                    Confirm
+                </button>
             </div>
         </div>
     );

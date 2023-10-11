@@ -69,21 +69,29 @@ button:focus-visible {
 }
 
 .Board_View {
-    background-color: red;
+    background-color: rgb(238, 238, 238);
 }
 
 .Column__Wrapper {
     display: flex;
     flex-direction: row;
     gap: 2rem;
+    padding: 2rem;
 }
 
 .Column__Container {
-    background-color: orange;
+    background-color: rgb(205, 205, 205);
+    padding: 2rem;
+    border-radius: 0.6rem;
 }
 
 .Task__Item {
-    background-color: blue;
+    background-color: rgb(223, 248, 245);
+    border-radius: 5px;
+    padding: 0.5rem 2rem;
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+    max-width: 300px;
 }
 
 .Module__Backdrop {
