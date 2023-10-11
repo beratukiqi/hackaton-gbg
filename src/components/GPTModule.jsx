@@ -34,13 +34,34 @@ function GPTModule({ setPopupVisible }) {
 
         const data = [
             {
-                text: "Hej ",
+                text: "1. Set up a new React project.",
             },
             {
-                text: "Hej HEJ 222",
+                text: "2. Design the UI (components).",
             },
             {
-                text: "Hej HEJ 333",
+                text: "3. Set up state variables to store the current input and result.",
+            },
+            {
+                text: "4. Implement function for basic arithmetic operations.",
+            },
+            {
+                text: "5. Handle button clicks to update the input and perform calculations",
+            },
+            {
+                text: "6. Implement additional operations.",
+            },
+            {
+                text: "7. Implement a reset button to clear the calc.",
+            },
+            {
+                text: "8. Error handling: division by zero and input validation.",
+            },
+            {
+                text: "9. Deployment.",
+            },
+            {
+                text: "10. Write documentation and user guide.",
             },
         ];
 
